@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FitTrack - Exercises</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <a class="btn" href="index.html">← Home</a>
+      <h1>Exercises</h1>
+    </div>
+
+    <div class="grid">
+      <div class="panel">
+        <h2>Adaugă exercise</h2>
+        <form id="exerciseCreateForm" class="form">
+          <label>WorkoutId</label>
+          <input id="eWorkoutId" type="number" min="1" required placeholder="ex: 1" />
+
+          <label>Nume</label>
+          <input id="eName" required placeholder="ex: Bench Press" />
+
+          <div class="formRow">
+            <div>
+              <label>Sets</label>
+              <input id="eSets" type="number" min="1" value="3" required />
+            </div>
+            <div>
+              <label>Reps</label>
+              <input id="eReps" type="number" min="1" value="10" required />
+            </div>
+          </div>
+
+          <div class="formRow">
+            <div>
+              <label>WeightKg</label>
+              <input id="eWeightKg" type="number" min="0" step="0.5" value="0" required />
+            </div>
+            <div>
+              <label>RestSeconds</label>
+              <input id="eRest" type="number" min="0" value="60" required />
+            </div>
+          </div>
+
+          <button class="btn primary" type="submit">Adaugă</button>
+        </form>
+      </div>
+
+      <div class="panel">
+        <div class="row">
+          <h2>Lista exercises</h2>
+          <button id="reloadExercises" class="btn">Reload</button>
+        </div>
+
+        <div class="row">
+          <input id="filterWorkoutId" type="number" min="1" placeholder="Filter WorkoutId (ex: 1)" />
+          <button id="applyFilter" class="btn">Apply</button>
+          <button id="clearFilter" class="btn">Clear</button>
+        </div>
+
+        <div id="exercisesError" class="error hidden"></div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>WorkoutId</th>
+              <th>Nume</th>
+              <th>Sets</th>
+              <th>Reps</th>
+              <th>Kg</th>
+              <th>Rest</th>
+              <th>Acțiuni</th>
+            </tr>
+          </thead>
+          <tbody id="exercisesTbody"></tbody>
+        </table>
+
+        <div class="muted small">
+     
+        </div>
+      </div>
+    </div>
+  </div>
+<div id="exerciseModalOverlay" class="modalOverlay">
+  <div class="modal">
+    <div class="modalHeader">
+      <h3 class="modalTitle">Editează exercise</h3>
+      <button id="closeExerciseModal" class="btn">✕</button>
+    </div>
+
+    <form id="exerciseEditForm" class="modalBody">
+      <input type="hidden" id="editExerciseId" />
+
+      <label>Nume</label>
+      <input id="editEName" required />
+
+      <div class="formRow">
+        <div>
+          <label>Sets</label>
+          <input id="editESets" type="number" min="1" required />
+        </div>
+        <div>
+          <label>Reps</label>
+          <input id="editEReps" type="number" min="1" required />
+        </div>
+      </div>
+
+      <div class="formRow">
+        <div>
+          <label>WeightKg</label>
+          <input id="editEWeightKg" type="number" min="0" step="0.5" required />
+        </div>
+        <div>
+          <label>RestSeconds</label>
+          <input id="editERest" type="number" min="0" required />
+        </div>
+      </div>
+
+      <div class="modalFooter">
+        <button type="button" id="cancelExerciseEdit" class="btn">Cancel</button>
+        <button type="submit" class="btn primary">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+  <script src="app.js"></script>
+  <script>FitTrackUI.initExercises();</script>
+</body>
+</html>

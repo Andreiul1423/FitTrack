@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FitTrack - Workouts</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <a class="btn" href="index.html">← Home</a>
+      <h1>Workouts</h1>
+    </div>
+
+    <div class="grid">
+      <!-- LEFT: Create form -->
+      <div class="panel">
+        <h2>Adaugă workout</h2>
+
+        <form id="workoutCreateForm" class="form">
+          <label>Nume</label>
+          <input id="wName" required placeholder="ex: Push Day" />
+
+          <label>Data</label>
+          <input id="wDate" type="date" required />
+
+          <label>Notes</label>
+          <input id="wNotes" placeholder="opțional" />
+
+          <label>Description</label>
+          <textarea id="wDescription" placeholder="detalii: obiectiv, încălzire, exerciții recomandate, etc."></textarea>
+
+          <button class="btn primary" type="submit">Adaugă</button>
+        </form>
+
+        <div class="hint muted">
+          Tip: creează întâi un workout, apoi folosește <b>ID-ul</b> lui când adaugi exerciții.
+        </div>
+      </div>
+
+      <!-- RIGHT: List -->
+      <div class="panel">
+        <div class="row">
+          <h2>Lista workouts</h2>
+          <button id="reloadWorkouts" class="btn">Reload</button>
+        </div>
+
+        <div id="workoutsError" class="error hidden"></div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="width:60px;">Nr.</th>
+              <th style="width:70px;">ID</th>
+              <th style="min-width:180px;">Nume</th>
+              <th style="width:120px;">Data</th>
+              <th style="min-width:160px;">Notes</th>
+              <th style="min-width:220px;">Description</th>
+              <th style="width:240px;">Acțiuni</th>
+            </tr>
+          </thead>
+          <tbody id="workoutsTbody"></tbody>
+        </table>
+
+        <!-- VIEW BOX (lista exercițiilor pentru workout selectat) -->
+        <div id="workoutViewBox" class="panel hidden" style="margin-top:14px;">
+          <div class="row">
+            <h2 id="viewTitle">View workout</h2>
+            <button id="closeView" class="btn" type="button">Close</button>
+          </div>
+
+          <div id="viewMeta" class="muted small"></div>
+          <div id="viewError" class="error hidden"></div>
+
+          <table class="table" style="margin-top:10px;">
+            <thead>
+              <tr>
+                <th style="width:70px;">ID</th>
+                <th>Nume</th>
+                <th style="width:80px;">Sets</th>
+                <th style="width:80px;">Reps</th>
+                <th style="width:90px;">Kg</th>
+                <th style="width:110px;">Rest</th>
+              </tr>
+            </thead>
+            <tbody id="viewExercisesTbody"></tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Edit Workout Modal ===== -->
+  <div id="workoutModalOverlay" class="modalOverlay">
+    <div class="modal">
+      <div class="modalHeader">
+        <h3 class="modalTitle">Editează workout</h3>
+        <button id="closeWorkoutModal" class="btn" type="button">✕</button>
+      </div>
+
+      <form id="workoutEditForm" class="modalBody">
+        <input type="hidden" id="editWorkoutId" />
+
+        <label>Nume</label>
+        <input id="editWName" required />
+
+        <label>Data</label>
+        <input id="editWDate" type="date" required />
+
+        <label>Notes</label>
+        <input id="editWNotes" />
+
+        <label>Description</label>
+        <textarea id="editWDescription"></textarea>
+
+        <div class="modalFooter">
+          <button type="button" id="cancelWorkoutEdit" class="btn">Cancel</button>
+          <button type="submit" class="btn primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>FitTrackUI.initWorkouts();</script>
+</body>
+</html>
